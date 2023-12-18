@@ -8,10 +8,15 @@ from m6_todo_app.models import Tasks
 @login_required(login_url='/auth/login/')
 def home(request):
     user_tasks = Tasks.objects.filter(user=request.user.id)
+    done_tasks = Tasks.objects.filter(user=request.user.id, done=True).count()
+    undone_tasks = Tasks.objects.filter(user=request.user.id, done=False).count()
     return render(request,
                   'index.html',
-                  {'tasks': user_tasks, 'task_number': user_tasks.count()}
-                )
+                  {'tasks': user_tasks,
+                   'task_number': user_tasks.count(),
+                   'done_tasks': done_tasks,
+                   'undone_tasks': undone_tasks
+                   })
 
 def login(request):
     if request.method == 'GET':

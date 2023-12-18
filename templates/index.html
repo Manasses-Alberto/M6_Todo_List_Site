@@ -31,10 +31,47 @@
                 <input type="text" class="form-control" placeholder="Pesquise suas tarefas..." aria-label="Pesquise suas tarefas..." aria-describedby="task-search" id="task-search">
                 <button class="btn btn-outline-secondary" type="button" id="task-search-btn"><i class="bi bi-search"></i></button>
             </div>
-            <div class="task-element">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#tasks-element">Todas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#done-tasks-element">Concluídas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#undone-tasks-element">Inconcluídas</a>
+              </li>
+            </ul>
+            <div id="tasks-element">
+              {% if task_number == 0 %}
               <div id="data-error">
                 <i class="bi bi-emoji-frown-fill"></i>
                 <p class="text-danger text-center lead">Você não tem nehuma tarefa salva!</p>
+              </div>
+              {% else %}
+              <ul class="list-group">
+                {% for task in tasks %}
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold">{{ task.title }}</div>
+                    <p>{{ task.description }}...</p>
+                  </div>
+                  <span class="badge bg-primary rounded-pill"></span>
+                </li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+            <div id="done-tasks-element">
+              <div id="data-error">
+                <i class="bi bi-emoji-frown-fill"></i>
+                <p class="text-danger text-center lead">Você não tem nehuma tarefa concluída!</p>
+              </div>
+            </div>
+            <div id="undone-tasks-element">
+              <div id="data-error">
+                <i class="bi bi-emoji-frown-fill"></i>
+                <p class="text-danger text-center lead">Você não tem nehuma tarefa inconcluída!</p>
               </div>
             </div>
         </article>
