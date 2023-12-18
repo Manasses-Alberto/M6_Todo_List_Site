@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from m6_todo_app.models import Tasks
 
 @login_required(login_url='/auth/login/')
 def home(request):
@@ -128,3 +129,14 @@ def register(request):
             user_auth = authenticate(request, username=username, password=password)
             auth_login(request, user_auth)
             return redirect('home')
+
+@login_required(login_url='/auth/login/')
+def new_task(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        start = request.POST['start-datetime']
+        end = request.POST['end-datetime']
+        description = request.POST['description'] if request.POST['description'] != '' else None
+        new_task = Tasks(title=title, start=start, end=end, description=description, user=request.user)
+        new_task.save()
+        return redirect('home')
