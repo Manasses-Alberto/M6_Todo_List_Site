@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&family=Ubuntu:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../m6_todo_app/static/styles/index.css">
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}">
 </head>
 <body>
     <header>
@@ -97,6 +98,6 @@
         <p>Desenvolvedor <a href="https://www.github.com/Manasses-Alberto/" target="_blank" rel="external">Manassés Ndombele</a></p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="../m6_todo_app/static/scripts/index.js"></script>
+    <script src="{% static 'scripts/index.js' %}"></script>
 </body>
 </html>
