@@ -7,4 +7,5 @@ class Tasks(models.Model):
     start = models.CharField(max_length=18)
     end = models.CharField(max_length=18)
     description = models.TextField(null=True)
+    done = models.BooleanField()    
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)

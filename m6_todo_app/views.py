@@ -7,7 +7,11 @@ from m6_todo_app.models import Tasks
 
 @login_required(login_url='/auth/login/')
 def home(request):
-    return render(request, 'index.html')
+    user_tasks = Tasks.objects.filter(user=request.user.id)
+    return render(request,
+                  'index.html',
+                  {'tasks': user_tasks, 'task_number': user_tasks.count()}
+                )
 
 def login(request):
     if request.method == 'GET':
@@ -137,6 +141,6 @@ def new_task(request):
         start = request.POST['start-datetime']
         end = request.POST['end-datetime']
         description = request.POST['description'] if request.POST['description'] != '' else None
-        new_task = Tasks(title=title, start=start, end=end, description=description, user=request.user)
+        new_task = Tasks(title=title, start=start, end=end, description=description, done=False, user=request.user)
         new_task.save()
         return redirect('home')
