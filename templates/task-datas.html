@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style_links %}
+    <link rel="stylesheet" href="{% static 'styles/task.css' %}">
+{% endblock %}
+{% block main_content %}
+    <article>
+        <h2>Dados da tarefa</h2>
+        <form>
+            <label for="title-field" class="mb-2">Título</label>
+            <input type="text" name="title" id="title-field" value="{{ task.title }}" class="form-control mb-2" readonly required>
+            <label for="start-field" class="mb-2">Começo</label>
+            <input type="text" name="start" id="start-field" value="{{ task.start }}" class="form-control mb-2" readonly required>
+            <label for="end-field" class="mb-2">Fim</label>
+            <input type="text" name="end" id="end-field" value="{{ task.end }}" class="form-control mb-2" readonly required>
+            <div class="form-check form-switch my-2">
+                {% if task.done %}
+                <input class="form-check-input" type="checkbox" role="switch" id="done-task" checked disabled>
+                <label class="form-check-label" for="done-task">Estado da tarefa - Concluída</label>
+                {% else %}
+                <input class="form-check-input" type="checkbox" role="switch" id="undone-task" disabled>
+                <label class="form-check-label" for="undone-task">Estado da tarefa - Inconcluída</label>
+                {% endif %}
+            </div>
+            <label for="description-field" class="mb-2">Descrição</label>
+            <textarea name="description" id="description-field" cols="30" rows="10" class="form-control mb-2" readonly required>{{ task.description }}</textarea>
+            <input type="submit" value="Salvar" class="visually-hidden">
+        </form>
+        <div class="actions mt-3">
+            <button type="button" id="edit-task-fields-btn" class="btn btn-process"><i class="bi bi-pencil-square"></i>Editar</button>
+            <button type="button" id="delete-task-btn" class="btn btn-process"><i class="bi bi-x-circle"></i>Eliminar</button>
+        </div>
+    </article>
+{% endblock %}
+{% block script_links %}
+    <script src="{% static 'scripts/task-datas.js' %}"></script>
+{% endblock %}

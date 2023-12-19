@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+:root {
+    --color-a: #B4BEC9;
+    --color-b: #159A9C;
+    --color-c: #002333;
+    --color-d: #DEEFE7;
+    --color-e: #FFFFFF;
+    --font-a: 'Oswald', sans-serif;
+    --font-b: 'Ubuntu', sans-serif;
+}
+
+article h2 {
+    text-align: center;
+    color: var(--color-a);
+    text-shadow: -2px 1px var(--color-d);
+    margin-top: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    color: var(--color-b);
+    font-size: 1.2em;
+}
+
+input { color: var(--color-b); }
+
+.form-switch {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.form-check-input { margin-right: 3px; }
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+button.btn-process {
+    background-color: var(--color-c);
+    color: var(--color-e);
+    width: 30%;
+}
+
+button.btn-process > i { margin-right: 8px; }
+
+@media screen and (min-width: 993px) {
+    button.btn-process:hover {
+        background-color: var(--color-c);
+        color: var(--color-e);
+        opacity: 0.9;
+    }
+}
