@@ -33,46 +33,82 @@
             </div>
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#tasks-element">Todas</a>
+                <a class="nav-link active" aria-current="page" href="#tasks-element" data-bs-target="tasks-element">Todas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#done-tasks-element">Concluídas</a>
+                <a class="nav-link" href="#done-tasks-element" data-bs-target="done-tasks-element">Concluídas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#undone-tasks-element">Inconcluídas</a>
+                <a class="nav-link" href="#undone-tasks-element" data-bs-target="undone-tasks-element">Inconcluídas</a>
               </li>
             </ul>
-            <div id="tasks-element">
+            <div id="tasks-element" class="tasks-display">
               {% if task_number == 0 %}
-              <div id="data-error">
+              <div class="data-error">
                 <i class="bi bi-emoji-frown-fill"></i>
                 <p class="text-danger text-center lead">Você não tem nehuma tarefa salva!</p>
               </div>
               {% else %}
               <ul class="list-group">
                 {% for task in tasks %}
-                <li class="list-group-item d-flex justify-content-between align-items-start">
+                <li class="task list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
-                    <div class="fw-bold">{{ task.title }}</div>
-                    <p>{{ task.description }}...</p>
+                    <p class="fw-bold task-title">{{ task.title }}</p>
+                    <p>{{ task.start }} -- {{ task.end }}</p>
                   </div>
-                  <span class="badge bg-primary rounded-pill"></span>
+                  {% if task.done %}
+                  <span class="badge bg-success rounded-pill">0</span>
+                  {% else %}
+                  <span class="badge bg-danger rounded-pill">0</span>
+                  {% endif %}
                 </li>
                 {% endfor %}
               </ul>
               {% endif %}
             </div>
-            <div id="done-tasks-element">
-              <div id="data-error">
+            <div id="done-tasks-element" class="tasks-display">
+              {% if done_tasks == 0 %}
+              <div class="data-error">
                 <i class="bi bi-emoji-frown-fill"></i>
                 <p class="text-danger text-center lead">Você não tem nehuma tarefa concluída!</p>
               </div>
+              {% else %}
+              <ul class="list-group">
+                {% for task in tasks %}
+                {% if task.done %}
+                <li class="task-done list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                    <p class="fw-bold done-task-title">{{ task.title }}</p>
+                    <p>{{ task.description }}...</p>
+                  </div>
+                  <span class="badge bg-success rounded-pill">0</span>
+                </li>
+                {% endif %}
+                {% endfor %}
+              </ul>
+              {% endif %}
             </div>
-            <div id="undone-tasks-element">
-              <div id="data-error">
+            <div id="undone-tasks-element" class="tasks-display">
+              {% if undone_tasks == 0 %}
+              <div class="data-error">
                 <i class="bi bi-emoji-frown-fill"></i>
                 <p class="text-danger text-center lead">Você não tem nehuma tarefa inconcluída!</p>
               </div>
+              {% else %}
+              <ul class="list-group">
+                {% for task in tasks %}
+                {% if not task.done %}
+                <li class="task-undone list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                    <p class="fw-bold undone-task-title">{{ task.title }}</p>
+                    <p>{{ task.description }}...</p>
+                  </div>
+                  <span class="badge bg-danger rounded-pill">0</span>
+                </li>
+                {% endif %}
+                {% endfor %}
+              </ul>
+              {% endif %}
             </div>
         </article>
         <aside>
@@ -113,11 +149,11 @@
                     <form class="modal-body" method="post" action="{% url 'new_task' %}">
                         {% csrf_token %}
                         <label for="title-field" class="my-2">Título</label>
-                        <input type="text" name="title" id="title-field" placeholder="Título" class="form-control">
+                        <input type="text" name="title" id="title-field" placeholder="Título" class="form-control" required>
                         <label for="start-datetime-field" class="my-2">Começo</label>
-                        <input type="datetime" name="start-datetime" id="start-datetime-field" placeholder="Data e hora para iniciar" class="form-control">
+                        <input type="datetime" name="start-datetime" id="start-datetime-field" placeholder="Data e hora para iniciar" class="form-control" required>
                         <label for="end-datetime-field" class="my-2">Fim</label>
-                        <input type="datetime" name="end-datetime" id="end-datetime-field" placeholder="Data e hora para terminar" class="form-control">
+                        <input type="datetime" name="end-datetime" id="end-datetime-field" placeholder="Data e hora para terminar" class="form-control" required>
                         <label for="description-field" class="my-2">Descrição</label>
                         <textarea name="description" id="description-field" cols="30" rows="5" placeholder="Descreva a sua tarefa" class="form-control"></textarea>
                         <input type="submit" value="Enviar" class="visually-hidden" id="submit-new-task">
