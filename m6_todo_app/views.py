@@ -149,3 +149,11 @@ def new_task(request):
         new_task = Tasks(title=title, start=start, end=end, description=description, done=False, user=request.user)
         new_task.save()
         return redirect('home')
+
+@login_required(login_url='/auth/login/')
+def task_datas(request, pk):
+    datas = Tasks.objects.get(user=request.user.id, pk=pk)
+    return render(request,
+                  'task-datas.html',
+                  {'task': datas}
+                )

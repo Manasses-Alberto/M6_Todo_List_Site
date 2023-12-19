@@ -1,3 +1,5 @@
+document.getElementById('add-new-task-btn').removeAttribute('disabled')
+
 document.getElementById('save-task-btn').addEventListener('click', () => {
     document.getElementById('submit-new-task').click()
 })
@@ -35,3 +37,10 @@ nav_links[2].addEventListener('click', () => {
         document.getElementsByClassName('tasks-display')[1].style.display = 'none'
     }
 })
+
+let general_task = document.getElementsByClassName('general-task')
+for (let task of general_task) {
+    task.addEventListener('click', () => {
+        location.href = `/task/datas/${task.getAttribute('data-bs-target')}/`
+    })
+}
