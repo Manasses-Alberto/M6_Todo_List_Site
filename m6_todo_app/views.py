@@ -157,3 +157,29 @@ def task_datas(request, pk):
                   'task-datas.html',
                   {'task': datas}
                 )
+
+@login_required(login_url='/auth/login/')
+def edit_task(request, pk):
+    if request.method == 'POST':
+        title = request.POST['title']
+        start = request.POST['start']
+        end = request.POST['end']
+        state = request.POST['done']
+        description = request.POST['description']
+        task = Tasks.objects.get(pk=pk)
+        task.title = title
+        task.start = start
+        task.end = end
+        task.description = description
+        if state == 'TRUE':
+            task.done = True
+        elif state == 'FALSE':
+            task.done = False
+        task.save()
+        return redirect('home')
+
+@login_required(login_url='/auth/login/')
+def delete_task(request, pk):
+    task = Tasks.objects.get(pk=pk)
+    task.delete()
+    return redirect('home')

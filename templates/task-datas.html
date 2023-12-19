@@ -6,7 +6,8 @@
 {% block main_content %}
     <article>
         <h2>Dados da tarefa</h2>
-        <form>
+        <form action="{% url 'edit_task' task.ID %}" method="post">
+            {% csrf_token %}
             <label for="title-field" class="mb-2">Título</label>
             <input type="text" name="title" id="title-field" value="{{ task.title }}" class="form-control mb-2" readonly required>
             <label for="start-field" class="mb-2">Começo</label>
@@ -15,20 +16,20 @@
             <input type="text" name="end" id="end-field" value="{{ task.end }}" class="form-control mb-2" readonly required>
             <div class="form-check form-switch my-2">
                 {% if task.done %}
-                <input class="form-check-input" type="checkbox" role="switch" id="done-task" checked disabled>
-                <label class="form-check-label" for="done-task">Estado da tarefa - Concluída</label>
+                <input class="form-check-input" name="done" type="checkbox" role="switch" id="status-radio" value="TRUE" checked disabled>
+                <label class="form-check-label" for="status-radio">Estado da tarefa - Concluída</label>
                 {% else %}
-                <input class="form-check-input" type="checkbox" role="switch" id="undone-task" disabled>
-                <label class="form-check-label" for="undone-task">Estado da tarefa - Inconcluída</label>
+                <input class="form-check-input" name="done" type="checkbox" role="switch" id="status-radio" value="FALSE" disabled>
+                <label class="form-check-label" for="status-radio">Estado da tarefa - Inconcluída</label>
                 {% endif %}
             </div>
             <label for="description-field" class="mb-2">Descrição</label>
             <textarea name="description" id="description-field" cols="30" rows="10" class="form-control mb-2" readonly required>{{ task.description }}</textarea>
-            <input type="submit" value="Salvar" class="visually-hidden">
+            <input type="submit" value="Salvar" class="visually-hidden" id="submit-task-form">
         </form>
         <div class="actions mt-3">
             <button type="button" id="edit-task-fields-btn" class="btn btn-process"><i class="bi bi-pencil-square"></i>Editar</button>
-            <button type="button" id="delete-task-btn" class="btn btn-process"><i class="bi bi-x-circle"></i>Eliminar</button>
+            <button type="button" id="delete-task-btn" class="btn btn-process" data-bs-target="{{ task.ID }}"><i class="bi bi-x-circle"></i>Eliminar</button>
         </div>
     </article>
 {% endblock %}
