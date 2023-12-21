@@ -20,8 +20,67 @@
             <div class="container-fluid">
               <h1 class="navbar-brand">M6 Todo</h1>
               <div class="d-flex">
-                <abbr title="Informações da conta"><button data-bs-target="#user-datas-modal" data-bs-toggle="modal"><i class="bi bi-person-circle"></i></button></abbr>
-                <abbr title="Nova tarefa"><button type="button" data-bs-target="#new-task-modal" data-bs-toggle="modal" id="add-new-task-btn" disabled><i class="bi bi-plus-circle-fill"></i></button></abbr>
+                <div class="btn-group dropstart">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><abbr title="Definições"><i class="bi bi-house-gear-fill"></i></abbr></button>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                      <li>
+                        <button type="button" data-bs-target="#new-task-modal" data-bs-toggle="modal" id="add-new-task-btn">
+                          <abbr title="Adicionar tarefa">
+                            <i class="bi bi-plus-circle-fill"></i>
+                            <span>Nova tarefa</span>
+                          </abbr>
+                        </button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button" id="home-btn">
+                          <abbr title="Ir para homepage">
+                            <i class="bi bi-house-fill"></i>
+                            <span>Home</span>
+                          </abbr>
+                        </button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button" id="auth-logout-session">
+                          <abbr title="Terminar sessão">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Terminar sessão</span>
+                          </abbr>
+                        </button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button" data-bs-target="#user-datas-modal" data-bs-toggle="modal">
+                          <abbr title="Dados do perfil">
+                            <i class="bi bi-person-lines-fill"></i>
+                            <span>Informções do perfil</span>
+                          </abbr>
+                        </button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button">
+                          <abbr title="Eliminar sua conta">
+                            <i class="bi bi-person-dash"></i>
+                            <span>Eliminar perfil</span>
+                          </abbr>
+                        </button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button">
+                          <abbr title="Editar perfil">
+                            <i class="bi bi-person-fill-gear"></i>
+                            <span>Editar perfil</span>
+                          </abbr>
+                        </button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button">
+                          <abbr title="Eliminar todas tarefas">
+                            <i class="bi bi-trash-fill"></i>
+                            <span>Limpar tarefas</span>
+                          </abbr>
+                        </button>
+                      </li>
+                    </ul>
+                </div>
               </div>
             </div>
         </nav>

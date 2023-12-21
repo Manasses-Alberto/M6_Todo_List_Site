@@ -25,9 +25,38 @@ header button {
     background-color: transparent;
 }
 
-header i {
+.navbar > .container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dropdown-toggle i {
     color: var(--color-b);
     font-size: xx-large;
+}
+
+.dropdown-menu li,
+.dropdown-menu button {
+    display: flex !important;
+    justify-content: left !important;
+    text-decoration: none !important;
+}
+
+abbr {
+    display: flex !important;
+    justify-content: left !important;
+    align-items: center !important;
+}
+
+abbr > i {
+    color: var(--color-b);
+    font-size: 1.5em;
+    margin-right: 3px !important;
+}
+
+abbr > span {
+    color: var(--color-e);
 }
 
 main {

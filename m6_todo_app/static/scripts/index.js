@@ -1,5 +1,3 @@
-document.getElementById('add-new-task-btn').removeAttribute('disabled')
-
 document.getElementById('save-task-btn').addEventListener('click', () => {
     document.getElementById('submit-new-task').click()
 })
@@ -44,3 +42,11 @@ for (let task of general_task) {
         location.href = `/task/datas/${task.getAttribute('data-bs-target')}/`
     })
 }
+
+document.getElementById('home-btn').addEventListener('click', () => {
+    location.href = '/'
+})
+
+document.getElementById('auth-logout-session').addEventListener('click', () => {
+    location.href = '/auth/logout/'
+})
